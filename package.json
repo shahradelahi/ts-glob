@@ -1,6 +1,6 @@
 {
   "name": "@se-oss/glob",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "A high-performance, compiler-grade glob matching and parsing library for TypeScript and JavaScript.",
   "keywords": [
     "glob",
