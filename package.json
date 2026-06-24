@@ -1,8 +1,19 @@
 {
   "name": "@se-oss/glob",
   "version": "0.0.0",
-  "description": "",
-  "keywords": [],
+  "description": "A high-performance, compiler-grade glob matching and parsing library for TypeScript and JavaScript.",
+  "keywords": [
+    "glob",
+    "match",
+    "matcher",
+    "pattern",
+    "wildcard",
+    "minimatch",
+    "picomatch",
+    "parser",
+    "ast",
+    "typescript"
+  ],
   "homepage": "https://github.com/shahradelahi/ts-glob",
   "repository": "github:shahradelahi/ts-glob",
   "license": "MIT",

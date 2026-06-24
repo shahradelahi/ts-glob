@@ -24,7 +24,10 @@ function validatePattern(pattern: any, options: GlobOptions = {}): void {
 }
 
 /**
- * Compiles a glob pattern into a regular expression.
+ * Compile glob to RegExp.
+ *
+ * @example
+ * makeRe('src/*.ts') // => /^src\/[^/]*\.ts$/
  */
 export function makeRe(pattern: string, options: GlobOptions = {}): RegExp {
   validatePattern(pattern, options);
@@ -67,7 +70,11 @@ function getTestInput(input: string, pattern: string, options: GlobOptions): str
 }
 
 /**
- * Compiles a glob pattern into a matcher function.
+ * Compile glob to matcher function.
+ *
+ * @example
+ * const match = compile('src/*.ts');
+ * match('src/index.ts') // => true
  */
 export function compile(pattern: string, options: GlobOptions = {}): MatcherFunction {
   if (isDefinitelyStatic(pattern)) {
@@ -84,7 +91,11 @@ export function compile(pattern: string, options: GlobOptions = {}): MatcherFunc
 }
 
 /**
- * Checks if an input string matches a pattern (or list of patterns).
+ * Check if path matches pattern or list of patterns.
+ *
+ * @example
+ * isMatch('src/index.ts', 'src/*.ts') // => true
+ * isMatch('src/index.ts', ['src/*.ts', '!src/index.ts']) // => false
  */
 export function isMatch(
   input: string,
@@ -129,7 +140,10 @@ export function isMatch(
 }
 
 /**
- * Parses a glob pattern into its Abstract Syntax Tree (AST).
+ * Parse glob to AST.
+ *
+ * @example
+ * parse('src/*.ts') // => ASTNode
  */
 export function parse(pattern: string, options: GlobOptions = {}): ASTNode {
   validatePattern(pattern, options);
@@ -138,7 +152,10 @@ export function parse(pattern: string, options: GlobOptions = {}): ASTNode {
 }
 
 /**
- * Parses a glob pattern safely, returning a discriminated union.
+ * Safely parse glob to AST. Returns discriminated union.
+ *
+ * @example
+ * safeParse('src/[a-z') // => { success: false, error: GlobSyntaxError }
  */
 export function safeParse(pattern: string, options: GlobOptions = {}): SafeParseResult {
   try {
@@ -155,8 +172,10 @@ export function safeParse(pattern: string, options: GlobOptions = {}): SafeParse
 }
 
 /**
- * Scans a glob pattern and returns meta-information, including
- * the leading static path (base) and whether the pattern is dynamic.
+ * Extract static base path and dynamic status.
+ *
+ * @example
+ * scan('src/*.ts') // => { base: 'src', isDynamic: true, pattern: 'src/*.ts' }
  */
 export function scan(pattern: string, options: GlobOptions = {}): ScanResult {
   validatePattern(pattern, options);
@@ -223,8 +242,10 @@ export function scan(pattern: string, options: GlobOptions = {}): ScanResult {
 }
 
 /**
- * Checks if a directory path is a potential partial match for a glob pattern.
- * Highly useful for watchers/tree-traversal to decide whether to skip directory scanning.
+ * Check if directory path partially matches pattern. Useful for watchers.
+ *
+ * @example
+ * isPartialMatch('src', 'src/*.ts') // => true
  */
 export function isPartialMatch(path: string, pattern: string, options: GlobOptions = {}): boolean {
   if (typeof path !== 'string') {
